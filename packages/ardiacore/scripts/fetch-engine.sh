@@ -23,6 +23,8 @@ case "${1:-}" in
   *) die "usage: fetch-engine.sh [--nearest]" ;;
 esac
 
+[[ "$(uname -m)" == arm64 ]] || die "prebuilt ArdiaCore engines are Apple Silicon (arm64) only. Intel builds need a matching x86_64 Chromium Framework.framework; set ARDIACORE_FRAMEWORK to its path (docs/engine-build.md)."
+
 key="$root/engine/engine-key.sh"
 git -C "$root" rev-parse --git-dir >/dev/null 2>&1 || die "$root isn't a git checkout: a prebuilt engine is matched to its engine key (engine/engine-key.sh)"
 key_paths=($("$key" --paths))
