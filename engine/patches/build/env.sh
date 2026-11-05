@@ -12,9 +12,11 @@ export HELIUM_DIR="$CB/helium"
 export HELIUM_MACOS_DIR="$CB/helium-macos"
 export HELIUM_LINUX_TAG=0.21.2.1
 export HELIUM_LINUX_DIR="$CB/helium-linux"
+export AC_TARGET_CPU="${AC_TARGET_CPU:-${TARGET_CPU:-}}"
 _ac_target_config=$(python3 "$(dirname "${BASH_SOURCE[0]:-$0}")/target_config.py" --shell) || return $?
 eval "$_ac_target_config"
 unset _ac_target_config
+export TARGET_CPU="$AC_TARGET_CPU"
 if [[ "$AC_TARGET_OS" == linux ]]; then
   export CHROMIUM_SRC="${CHROMIUM_SRC:-$CB/chromium_git/chromium/src}"
 fi
